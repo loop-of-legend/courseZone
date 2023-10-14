@@ -10,6 +10,7 @@ import {RiClosedCaptioningFill} from "react-icons/ri";
 import {BiCheck} from "react-icons/bi";
 import {Link} from "react-router-dom";
 import { useCartContext } from '../context/cart_context';
+import Footer from '../components/footer';
 
 const SingleCoursePage = () => {
   const {id} = useParams();
@@ -69,7 +70,7 @@ const SingleCoursePage = () => {
           </div>
 
           <div className='course-btn'>
-            <Link to = "/cart" className='add-to-cart-btn d-inline-block fw-7 bg-purple' onClick={() => addToCart(courseID, image, course_name, creator, discounted_price, category)}>
+            <Link to = "/cart" className='add-to-cart-btn d-inline-block fw-7 bg-orange' onClick={() => addToCart(courseID, image, course_name, creator, discounted_price, category)}>
               <FaShoppingCart /> Add to cart
             </Link>
           </div>
@@ -108,6 +109,7 @@ const SingleCoursePage = () => {
           </ul>
         </div>
       </div>
+      <Footer />
     </SingleCourseWrapper>
   )
 }
@@ -119,6 +121,15 @@ const SingleCourseWrapper = styled.div`
   .course-intro{
     padding: 40px 16px;
     max-width: 992px;
+
+    .course-img{
+      overflow: hidden;
+      img{
+        width: 100%;
+        border-radius: 1rem;
+      }
+    }
+
 
     .course-details{
       padding-top: 20px;
@@ -147,7 +158,7 @@ const SingleCourseWrapper = styled.div`
     }
     .rating-count{
       margin-left: 6px;
-      color: #d097f6;
+      color: var(--clr-green);
     }
     .course-info{
       li{
@@ -174,6 +185,7 @@ const SingleCourseWrapper = styled.div`
       margin-top: 16px;
       .add-to-cart-btn{
         padding: 12px 28px;
+        border-radius: 1rem;
         span{
           margin-left: 12px;
         }

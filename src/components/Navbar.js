@@ -4,33 +4,64 @@ import {MdMenu, MdShoppingCart} from "react-icons/md";
 import {Link} from 'react-router-dom';
 import { useSidebarContext } from '../context/sidebar_context';
 import { useCartContext } from '../context/cart_context';
+import { useAuth0 } from '@auth0/auth0-react'; 
+
 
 const Navbar = () => {
-  const {total_items} = useCartContext();
-  const {openSidebar} = useSidebarContext();
+  const { total_items } = useCartContext();
+  const { openSidebar } = useSidebarContext();
+  const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0(); // Auth0 hooks
 
   return (
-    <NavbarWrapper className = "bg-white flex">
-      <div className='container w-100'>
-        <div className='brand-and-toggler flex flex-between w-100'>
-          <Link to = "/" className='navbar-brand text-uppercase ls-1 fw-8'>
+    <NavbarWrapper className="bg-white flex">
+      <div className="container w-100">
+        <div className="brand-and-toggler flex flex-between w-100">
+          <Link to="/" className="navbar-brand text-uppercase ls-1 fw-8">
             <span>Course</span>Zone
           </Link>
 
-          <div className='navbar-btns flex'>
-            <Link to = "/cart" className='cart-btn'>
-              <MdShoppingCart />
-              <span className='item-count-badge'>{total_items}</span>
-            </Link>
-            <button type = "button" className='sidebar-open-btn' onClick={() => openSidebar()}>
-              <MdMenu />
+          {isAuthenticated ? (
+            // If the user is authenticated, display user information and a logout button
+            <div className="user-info">
+              {user.name || user.nickname}
+              <button
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            
+            // If the user is not authenticated, display a login button
+            <button
+              type="button"
+              onClick={() => loginWithRedirect()}
+              className="login-btn"
+            >
+              Log In
             </button>
-          </div>
+          )}
+
+          {isAuthenticated && (
+            <div className="navbar-btns flex">
+              <Link to="/cart" className="cart-btn">
+                <MdShoppingCart />
+                <span className="item-count-badge">{total_items}</span>
+              </Link>
+              <button
+                type="button"
+                className="sidebar-open-btn"
+                onClick={() => openSidebar()}
+              >
+                <MdMenu />
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </NavbarWrapper>
-  )
-}
+  );
+};
 
 const NavbarWrapper = styled.nav`
   height: 80px;
@@ -70,6 +101,32 @@ const NavbarWrapper = styled.nav`
       opacity: 0.7;
     }
   }
+  .user-info {
+    font-weight: 500;
+    margin-right: 20px;
+  }
+
+  .login-btn {
+    background-color: var(--clr-orange);
+    color: var(--clr-white);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+
+   
+  }
+
+  button {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
 `;
 
-export default Navbar;
+export default Navbar; 

@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCartContext } from "../context/cart_context";
 import styled from "styled-components";
 import CartItem from "../components/CartItem";
 import { MdClear } from "react-icons/md";
+import Course from "../components/Course";
+import {
+  PYTHON,
+  WEB_DEVELOPMENT,
+  DATA_SCIENCE,
+  AWS,
+  DESIGN,
+  MARKETING,
+} from "../utils/constants";
+import courses from "../utils/data";
+import Footer from "../components/footer";
 
 const CartPage = () => {
+  const [activeTab, setActiveTab] = useState(AWS);
   const {
     cart: cartItems,
     total_items,
@@ -59,7 +71,7 @@ const CartPage = () => {
               </div>
               <button
                 type="button"
-                className="checkout-btn bg-purple text-white fw-6"
+                className="checkout-btn bg-orange text-white fw-6"
               >
                 Checkout
               </button>
@@ -67,7 +79,24 @@ const CartPage = () => {
           </div>
           {/* end of cart grid right */}
         </div>
+        <div className="suggested-courses">
+          <div className="suggest-title">
+            <h2> 
+              You might also like
+            </h2>
+          </div>
+          <div className="tabs">
+            <div className="suggested-courses-list grid tabs-body">
+              {courses
+                .filter((course) => course.category === activeTab)
+                .map((course) => (
+                  <Course key={course.id} {...course} />
+                ))}            
+            </div>
+          </div>
+        </div>
       </div>
+      <Footer />
     </CartWrapper>
   );
 };
@@ -107,7 +136,7 @@ const CartWrapper = styled.div`
       letter-spacing: 1px;
       margin-top: 12px;
       transition: var(--transition);
-
+      border-radius: 1rem;
       &:hover {
         background-color: var(--clr-dark);
       }
@@ -119,6 +148,49 @@ const CartWrapper = styled.div`
     @media screen and (min-width: 992px) {
       grid-template-columns: 70% 30%;
       column-gap: 32px;
+    }
+  }
+
+  .tabs {
+    margin-top: 16px;
+    .tabs-head-item button {
+      border: 1px solid rgba(0, 0, 0, 0.7);
+      padding: 10px 13px;
+      margin-right: 6px;
+      transition: var(--transition);
+      font-weight: 500;
+      font-size: 15px;
+      margin-bottom: 10px;
+      border-radius: 1rem;
+      
+      &:hover {
+        background-color: var(--clr-black);
+        color: var(--clr-white);
+      }
+    }
+
+    .tabs-body {
+      margin-top: 32px;
+    }
+
+    @media screen and (min-width: 600px) {
+      .tabs-body {
+        display: grid;
+        gap: 26px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media screen and (min-width: 992px) {
+      .tabs-body {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media screen and (min-width: 1400px) {
+      .tabs-body {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
   }
 `;
