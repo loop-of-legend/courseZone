@@ -57,7 +57,6 @@ function Footer() {
           </div>
         </div>
         <div class="footer-center col-md-4 col-sm-6">
-          <FontAwesomeIcon style={{ color: "white" }} icon={faMapMarker} />
 
           <div>
             <p>
@@ -81,7 +80,7 @@ function Footer() {
         <div class="footer-right col-md-4 col-sm-6">
           <h2>
             {" "}
-            Company<span> logo</span>
+            <span>Course</span>Zone
           </h2>
           <p class="menu">
             <a href="#"> Home</a> |<a href="#"> About</a> |

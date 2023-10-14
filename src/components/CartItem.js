@@ -45,6 +45,7 @@ const CartItemWrapper = styled.div`
     width: 100px;
     height: 100px;
     overflow: hidden;
+    border-radius: 1rem;
     img {
       width: 100%;
       height: 100%;

@@ -68,6 +68,19 @@ const CourseCard = styled.div`
   box-shadow: rgba(149, 157, 165, 0.1) 0px 8px 24px;
   display: flex;
   flex-direction: column;
+  border-radius: 1rem;
+
+  .item-img {
+    width: 100%;
+    border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
+  }
+
+  .item-img img:hover {
+    scale: 1.1;
+    transition: all 0.3s ease-in-out;
+    }
+
   .item-body {
     margin: 14px 0;
     padding: 4px 18px;
@@ -119,6 +132,7 @@ const CourseCard = styled.div`
       font-weight: 700;
       transition: var(--transition);
       white-space: nowrap;
+      border-radius: 1rem;
 
       &.see-details-btn {
         background-color: transparent;

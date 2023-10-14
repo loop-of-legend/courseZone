@@ -21,6 +21,7 @@ const CategoryItemWrapper = styled.div`
   padding: 20px;
   border: 1px solid transparent;
   transition: var(--transition);
+  border-radius: 1rem;
   .category-item-img{
     img{
       max-width: 110px;

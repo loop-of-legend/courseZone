@@ -18,7 +18,7 @@ const Hero = () => {
 const HeroWrapper = styled.div`
   background: url(${other_images.hero_img}) center/cover no-repeat;
   height: 300px;
-
+  
   .container{
     .hero-content{
       background-color: var(--clr-white);
@@ -26,6 +26,7 @@ const HeroWrapper = styled.div`
       width: 100%;
       margin-left: 0;
       padding: 20px;
+      border-radius: 1rem;
 
       h1{
         font-size: 32px;
