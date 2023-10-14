@@ -9,13 +9,14 @@ import Sidebar from "./components/Sidebar";
 function App() {
   return (
     <BrowserRouter>
+     
       <Navbar />
       <Sidebar />
       <Routes>
-        <Route path = "/" element = {<Home />} />
-        <Route path = "/courses/:id" element = {<SingleCourse />} />
-        <Route path = "/category/:category" element = {<Courses />} />
-        <Route path = "/cart" element = {<Cart />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/courses/:id" element={<SingleCourse />} />
+        <Route path="/category/:category" element={<Courses />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
