@@ -1,11 +1,10 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
-import {MdMenu, MdShoppingCart} from "react-icons/md";
-import {Link} from 'react-router-dom';
-import { useSidebarContext } from '../context/sidebar_context';
-import { useCartContext } from '../context/cart_context';
-import { useAuth0 } from '@auth0/auth0-react'; 
-
+import { MdMenu, MdShoppingCart } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { useSidebarContext } from "../context/sidebar_context";
+import { useCartContext } from "../context/cart_context";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
   const { total_items } = useCartContext();
@@ -22,23 +21,29 @@ const Navbar = () => {
 
           {isAuthenticated ? (
             // If the user is authenticated, display user information and a logout button
-            <div className="user-info">
-              {user.name || user.nickname}
+            <>
               <button
+                type="button"
+                className="logout-btn"
                 onClick={() => logout({ returnTo: window.location.origin })}
               >
                 Logout
               </button>
-            </div>
+
+              <img className="user-image"
+               
+                src={user.picture}
+                alt={user.name}
+              />
+            </>
           ) : (
-            
             // If the user is not authenticated, display a login button
             <button
               type="button"
               onClick={() => loginWithRedirect()}
               className="login-btn"
             >
-              Log In
+              Get Started
             </button>
           )}
 
@@ -65,19 +70,20 @@ const Navbar = () => {
 
 const NavbarWrapper = styled.nav`
   height: 80px;
-  box-shadow: rgba(50, 50, 93, 0.15) 0px 16px 12px -2px, rgba(0, 0, 0, 0.2) 0px 3px 7px -3px;
+  box-shadow: rgba(50, 50, 93, 0.15) 0px 16px 12px -2px,
+    rgba(0, 0, 0, 0.2) 0px 3px 7px -3px;
 
-  .navbar-brand{
+  .navbar-brand {
     font-size: 23px;
-    span{
+    span {
       color: var(--clr-orange);
     }
   }
-  .cart-btn{
+  .cart-btn {
     margin-right: 18px;
     font-size: 23px;
     position: relative;
-    .item-count-badge{
+    .item-count-badge {
       background-color: var(--clr-orange);
       position: absolute;
       right: -10px;
@@ -95,18 +101,15 @@ const NavbarWrapper = styled.nav`
     }
   }
 
-  .sidebar-open-btn{
+  .sidebar-open-btn {
     transition: all 300ms ease-in-out;
-    &:hover{
+    &:hover {
       opacity: 0.7;
     }
   }
-  .user-info {
-    font-weight: 500;
-    margin-right: 20px;
-  }
 
-  .login-btn {
+  .login-btn,
+  .logout-btn {
     background-color: var(--clr-orange);
     color: var(--clr-white);
     padding: 10px 20px;
@@ -114,19 +117,47 @@ const NavbarWrapper = styled.nav`
     border-radius: 5px;
     cursor: pointer;
     font-weight: 500;
-
-   
+  }
+  .logout-btn {
+    margin-right: 22rem;
+    position: absolute;
+    right: 12px;
+    top: 12px;
   }
 
-  button {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+  .user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 35rem;
+    position: absolute;
+    right: 0;
+    top: 12px;
   }
 
+  @media screen and (max-width: 768px) {
+    .logout-btn {
+      margin-right: 8rem;
+      right: 1rem;
+      position: absolute;
+      top: 2rem;
+    }
+
+    .logout-btn,
+    .login-btn {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+
+    .user-image {
+      width: 30px;
+      height: 30px;
+      right: 1rem;
+      margin-right: 17rem;
+      position: absolute;
+      top: 2rem;
+    }
+  }
 `;
 
-export default Navbar; 
+export default Navbar;
