@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSidebarContext } from "../context/sidebar_context";
 import { useCartContext } from "../context/cart_context";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, Image } from "react-bootstrap";
+import {  Image } from "react-bootstrap";
 
 const Navbar = () => {
   const { total_items } = useCartContext();
@@ -22,22 +22,21 @@ const Navbar = () => {
 
           {isAuthenticated ? (
             // If the user is authenticated, display user information and a logout button
-            <>
+            <div className="flex flex-between personal">
+                            <Image
+                className="user-image"
+                src={user.picture}
+                alt={user.name}
+              />
+
               <button
                 type="button"
-                variant="danger"
                 className="logout-btn"
                 onClick={() => logout({ returnTo: window.location.origin })}
               >
                 Logout
               </button>
-
-              <Image
-                className="user-image"
-                src={user.picture}
-                alt={user.name}
-              />
-            </>
+            </div>
           ) : (
             // If the user is not authenticated, display a login button
             <button
@@ -116,48 +115,31 @@ const NavbarWrapper = styled.nav`
     color: var(--clr-white);
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 1rem;
     cursor: pointer;
     font-weight: 500;
   }
-  .logout-btn {
-    margin-right: 22rem;
-    position: absolute;
-    right: 12px;
-    top: 12px;
+
+  .personal {
+    column-gap: 1rem;
   }
 
   .user-image {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 35rem;
-    position: absolute;
-    right: 0;
-    top: 12px;
   }
 
-  @media screen and (max-width: 768px) {
-    .logout-btn {
-      margin-right: 8rem;
-      right: 1rem;
-      position: absolute;
-      top: 2rem;
-    }
-
+// media screen
+  @media screen and (max-width: 520px) {
     .logout-btn,
     .login-btn {
-      font-size: 14px;
+      font-size: 10px;
       padding: 8px 16px;
     }
 
     .user-image {
-      width: 30px;
-      height: 30px;
-      right: 1rem;
-      margin-right: 17rem;
-      position: absolute;
-      top: 2rem;
+      display: none;
     }
   }
 `;
