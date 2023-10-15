@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useSidebarContext } from "../context/sidebar_context";
 import { useCartContext } from "../context/cart_context";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Button, Image } from "react-bootstrap";
+import {  Image } from "react-bootstrap";
 
 const Navbar = () => {
   const { total_items } = useCartContext();
@@ -31,7 +31,6 @@ const Navbar = () => {
 
               <button
                 type="button"
-                variant="danger"
                 className="logout-btn"
                 onClick={() => logout({ returnTo: window.location.origin })}
               >
@@ -121,37 +120,27 @@ const NavbarWrapper = styled.nav`
     font-weight: 500;
   }
 
+  .personal {
+    column-gap: 1rem;
+  }
+
   .user-image {
     width: 40px;
     height: 40px;
     border-radius: 50%;
   }
 
-  @media screen and (max-width: 768px) {
-    .logout-btn {
-      margin-right: 8rem;
-      right: 1rem;
-      position: absolute;
-      top: 2rem;
-    }
-
+// media screen
+  @media screen and (max-width: 520px) {
     .logout-btn,
     .login-btn {
-      font-size: 14px;
+      font-size: 10px;
       padding: 8px 16px;
     }
 
     .user-image {
-      width: 30px;
-      height: 30px;
-      right: 1rem;
-      margin-right: 17rem;
-      position: absolute;
-      top: 2rem;
+      display: none;
     }
-  }
-  .personal {
-    column-gap: 1rem;
   }
 `;
 
