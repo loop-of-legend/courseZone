@@ -22,7 +22,13 @@ const Navbar = () => {
 
           {isAuthenticated ? (
             // If the user is authenticated, display user information and a logout button
-            <>
+            <div className="flex flex-between personal">
+                            <Image
+                className="user-image"
+                src={user.picture}
+                alt={user.name}
+              />
+
               <button
                 type="button"
                 variant="danger"
@@ -31,13 +37,7 @@ const Navbar = () => {
               >
                 Logout
               </button>
-
-              <Image
-                className="user-image"
-                src={user.picture}
-                alt={user.name}
-              />
-            </>
+            </div>
           ) : (
             // If the user is not authenticated, display a login button
             <button
@@ -116,25 +116,15 @@ const NavbarWrapper = styled.nav`
     color: var(--clr-white);
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 1rem;
     cursor: pointer;
     font-weight: 500;
-  }
-  .logout-btn {
-    margin-right: 22rem;
-    position: absolute;
-    right: 12px;
-    top: 12px;
   }
 
   .user-image {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    margin-right: 35rem;
-    position: absolute;
-    right: 0;
-    top: 12px;
   }
 
   @media screen and (max-width: 768px) {
@@ -159,6 +149,9 @@ const NavbarWrapper = styled.nav`
       position: absolute;
       top: 2rem;
     }
+  }
+  .personal {
+    column-gap: 1rem;
   }
 `;
 
