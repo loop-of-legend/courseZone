@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useSidebarContext } from "../context/sidebar_context";
 import { useCartContext } from "../context/cart_context";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Button, Image } from "react-bootstrap";
 
 const Navbar = () => {
   const { total_items } = useCartContext();
@@ -24,14 +25,15 @@ const Navbar = () => {
             <>
               <button
                 type="button"
+                variant="danger"
                 className="logout-btn"
                 onClick={() => logout({ returnTo: window.location.origin })}
               >
                 Logout
               </button>
 
-              <img className="user-image"
-               
+              <Image
+                className="user-image"
                 src={user.picture}
                 alt={user.name}
               />
