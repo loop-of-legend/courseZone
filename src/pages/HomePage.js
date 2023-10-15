@@ -1,18 +1,31 @@
-import React from 'react';
+import React from "react";
 import Hero from "../components/Hero";
 import CoursesList from "../components/CourseList";
 import CategoriesList from "../components/CategoriesList";
-import Footer from '../components/footer';
+import Footer from "../components/footer";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const HomePage = () => {
-  return (
-    <div className='holder'>
-      <Hero />
-      <CoursesList />
-      <CategoriesList />
-      <Footer />
-    </div>
-  )
-}
+  const { isAuthenticated } = useAuth0();
 
-export default HomePage
+  return (
+    <div className="holder">
+      {isAuthenticated ? (
+        <>
+          <Hero />
+          <CoursesList />
+          <CategoriesList />
+          <Footer />
+        </>
+      ) : (
+        <>
+          <Hero />
+          <CategoriesList />
+          <Footer />
+        </>
+      )}
+    </div>
+  );
+};
+
+export default HomePage;
