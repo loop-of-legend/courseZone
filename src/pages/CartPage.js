@@ -15,6 +15,8 @@ import {
 import courses from "../utils/data";
 import Footer from "../components/footer";
 
+import { MDBCard, MDBCardBody, MDBCardImage } from "mdb-react-ui-kit";
+
 const CartPage = () => {
   const [activeTab, setActiveTab] = useState(AWS);
   const {
@@ -23,6 +25,8 @@ const CartPage = () => {
     total_amount,
     clearCart,
   } = useCartContext();
+
+   
 
   if (cartItems.length < 1) {
     return (
@@ -69,6 +73,7 @@ const CartPage = () => {
               <div className="cart-total-value fw-8">
                 ${total_amount.toFixed(2)}
               </div>
+
               <button
                 type="button"
                 className="checkout-btn bg-orange text-white fw-6"
@@ -76,14 +81,46 @@ const CartPage = () => {
                 Checkout
               </button>
             </div>
+           
+            {/* Payment method div */}
+            <MDBCard>
+              <p>
+                <strong>We accept</strong>
+              </p>
+              <MDBCardBody className="flex flex-wrap" style={{ gap: "0.5rem" }}>
+                <MDBCardImage
+                  className="me-2"
+                  style={{ width: "45px" }}
+                  src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+                  alt="Visa"
+                />
+                <MDBCardImage
+                  className="me-2"
+                  style={{ width: "45px" }}
+                  src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+                  alt="American Express"
+                />
+                <MDBCardImage
+                  className="me-2"
+                  style={{ width: "45px" }}
+                  src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+                  alt="Mastercard"
+                />
+                <MDBCardImage
+                  className="me-2"
+                  style={{ width: "45px" }}
+                  src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+                  alt="PayPal acceptance mark"
+                />
+              </MDBCardBody>
+            </MDBCard>
           </div>
           {/* end of cart grid right */}
         </div>
+
         <div className="suggested-courses">
           <div className="suggest-title">
-            <h2> 
-              You might also like
-            </h2>
+            <h2>You might also like</h2>
           </div>
           <div className="tabs">
             <div className="suggested-courses-list grid tabs-body">
@@ -91,17 +128,18 @@ const CartPage = () => {
                 .filter((course) => course.category === activeTab)
                 .map((course) => (
                   <Course key={course.id} {...course} />
-                ))}            
+                ))}
             </div>
           </div>
         </div>
       </div>
+
       <Footer />
     </CartWrapper>
   );
 };
 
-// add the cart page 
+// add the cart page
 const NotFoundWrapper = styled.div`
   padding: 30px 0;
   font-weight: 600;
@@ -162,7 +200,7 @@ const CartWrapper = styled.div`
       font-size: 15px;
       margin-bottom: 10px;
       border-radius: 1rem;
-      
+
       &:hover {
         background-color: var(--clr-black);
         color: var(--clr-white);
